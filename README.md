@@ -8,7 +8,7 @@ config example
 experimental:
   plugins:
     methodBlock:
-        moduleName: github.com/moonlightwatch/MethodBlock
+        moduleName: github.com/antoniomacri/traefik-method-block
         version: v0.1.4
 
 ```
