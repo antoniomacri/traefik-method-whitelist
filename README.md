@@ -17,7 +17,7 @@ experimental:
 ```
 
 CLI:
-```
+```shell
 --experimental.plugins.method-whitelist.modulename=github.com/antoniomacri/traefik-method-whitelist
 --experimental.plugins.method-whitelist.version=v1.0.0
 ```
@@ -36,11 +36,11 @@ http:
         - my-plugin
 
   services:
-   service-foo:
+    service-foo:
       loadBalancer:
         servers:
           - url: http://127.0.0.1:5000
-  
+
   middlewares:
     my-plugin:
       plugin:
