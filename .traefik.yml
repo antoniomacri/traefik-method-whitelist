@@ -1,14 +1,14 @@
 # The name of your plugin as displayed in the Traefik Pilot web UI.
-displayName: HTTP Request Method Block
+displayName: HTTP Request Method Whitelist
 
 # For now, `middleware` is the only type available.
 type: middleware
 
 # The import path of your plugin.
-import: github.com/antoniomacri/traefik-method-block
+import: github.com/antoniomacri/traefik-method-whitelist
 
 # A brief description of what your plugin is doing.
-summary: Block some http request method
+summary: Allow only specific HTTP request methods
 
 # Medias associated to the plugin (optional)
 # iconPath: foo/icon.png

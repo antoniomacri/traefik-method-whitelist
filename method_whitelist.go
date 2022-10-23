@@ -1,4 +1,4 @@
-package MethodBlock
+package main
 
 import (
 	"context"
@@ -18,25 +18,34 @@ func CreateConfig() *Config {
 	}
 }
 
-type MethodBlock struct {
+type MethodWhitelist struct {
 	cfg  *Config
 	next http.Handler
 }
 
-func New(ctx context.Context, next http.Handler, config *Config, name string) (http.Handler, error) {
-	return &MethodBlock{
+func New(_ context.Context, next http.Handler, config *Config, _ string) (http.Handler, error) {
+	return &MethodWhitelist{
 		cfg:  config,
 		next: next,
 	}, nil
 }
 
-func (m *MethodBlock) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
+func (m *MethodWhitelist) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
+	allowed := false
 	for _, method := range m.cfg.Methods {
-		if method == req.Method {
-			rw.WriteHeader(http.StatusMethodNotAllowed)
-			rw.Write([]byte(m.cfg.Message))
-			return
+		if req.Method == method {
+			allowed = true
+			break
 		}
 	}
-	m.next.ServeHTTP(rw, req)
+	if allowed {
+		m.next.ServeHTTP(rw, req)
+	} else {
+		rw.WriteHeader(http.StatusMethodNotAllowed)
+		msg := m.cfg.Message
+		if msg == "" {
+			msg = "Method Not Allowed"
+		}
+		_, _ = rw.Write([]byte(msg))
+	}
 }

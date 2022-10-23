@@ -1,21 +1,30 @@
-# HTTP Request Method Block
+# Traefik method whitelist
 
-config example
+Traefik plugin to allow only specific HTTP methods.
 
+
+## Config example
+
+### Static configuration
+
+YAML:
 ```yml
-# Static configuration
-
 experimental:
   plugins:
-    methodBlock:
-        moduleName: github.com/antoniomacri/traefik-method-block
+    method-whitelist:
+        moduleName: github.com/antoniomacri/traefik-method-whitelist
         version: v0.1.4
-
 ```
 
-```yml
-# Dynamic configuration
+CLI:
+```
+--experimental.plugins.method-whitelist.modulename=github.com/antoniomacri/traefik-method-whitelist
+--experimental.plugins.method-whitelist.version=v0.1.4
+```
 
+### Dynamic configuration
+
+```yml
 http:
   routers:
     my-router:
@@ -35,7 +44,7 @@ http:
   middlewares:
     my-plugin:
       plugin:
-        methodBlock:
+        method-whitelist:
           Message: "Method Not Allowed"
           Methods:
             - GET
