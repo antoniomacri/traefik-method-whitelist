@@ -1,4 +1,4 @@
-package main
+package traefik_method_whitelist
 
 import (
 	"context"
