@@ -1,7 +1,8 @@
-package main
+package traefik_method_whitelist_test
 
 import (
 	"context"
+	plugin "github.com/antoniomacri/traefik-method-whitelist"
 	. "github.com/smartystreets/goconvey/convey"
 	"github.com/stretchr/testify/mock"
 	"net/http"
@@ -16,11 +17,11 @@ func TestWithRecorder(t *testing.T) {
 		mockHandler := &MockHandler{}
 		mockHandler.On("ServeHTTP", mock.Anything, mock.Anything).Return()
 
-		cfg := CreateConfig()
+		cfg := plugin.CreateConfig()
 		cfg.Message = "This Method Is Not Allowed"
 		cfg.Methods = []string{"GET", "POST"}
 
-		handler, err := New(ctx, mockHandler, cfg, "pluginName")
+		handler, err := plugin.New(ctx, mockHandler, cfg, "pluginName")
 
 		SoMsg("Plugin initialization error", err, ShouldBeNil)
 
@@ -65,10 +66,10 @@ func TestWithRecorder(t *testing.T) {
 		mockHandler := &MockHandler{}
 		mockHandler.On("ServeHTTP", mock.Anything, mock.Anything).Return()
 
-		cfg := CreateConfig()
+		cfg := plugin.CreateConfig()
 		cfg.Methods = []string{"GET", "POST"}
 
-		handler, err := New(ctx, mockHandler, cfg, "pluginName")
+		handler, err := plugin.New(ctx, mockHandler, cfg, "pluginName")
 
 		SoMsg("Plugin initialization error", err, ShouldBeNil)
 
