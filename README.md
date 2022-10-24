@@ -13,13 +13,13 @@ experimental:
   plugins:
     method-whitelist:
         moduleName: github.com/antoniomacri/traefik-method-whitelist
-        version: v1.0.0
+        version: v1.0.1
 ```
 
 CLI:
 ```shell
 --experimental.plugins.method-whitelist.modulename=github.com/antoniomacri/traefik-method-whitelist
---experimental.plugins.method-whitelist.version=v1.0.0
+--experimental.plugins.method-whitelist.version=v1.0.1
 ```
 
 ### Dynamic configuration
